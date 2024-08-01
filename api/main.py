@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from starlette.middleware.cors import CORSMiddleware
 import yt_dlp
-import os
 
 app = FastAPI()
 
@@ -35,11 +34,5 @@ async def read_youtube_id(youtube_id, q):
     if error_code != 0:
         raise HTTPException(status_code=400, detail='server error')
     else:
-        flist = os.listdir('./tmp')
-
-        for i in flist:
-            if(youtube_id in i):
-                destfn = i
-        
-        response = FileResponse(path=f'./tmp/{destfn}')
+        response = FileResponse(path=f'./tmp/{youtube_id}.mp3')
         return response
