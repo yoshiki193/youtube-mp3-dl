@@ -1,2 +1,2 @@
 # youtubeDL
-youtubeのダウンローダー
+youtube動画ダウンローダー
