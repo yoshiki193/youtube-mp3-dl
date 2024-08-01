@@ -1,31 +1,31 @@
-const elDownloadForm = document.getElementById('download-form');
-const elInputUrl = document.getElementById('input-url');
-const elquality = document.getElementById('select-quality');
-const elSubmitButton = document.getElementById('download-button');
+const elform = document.getElementById('mainform');
+const elinput = document.getElementById('url');
+const elquality = document.getElementById('quality');
+const elbutton = document.getElementById('dlbutton');
 
-elDownloadForm.addEventListener('submit', (event) => {
+elform.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    let youtubeId = '';
+    let youtubeid = '';
 
-    if(elInputUrl.value.match(/watch/)) {
-        const [_, queryString] = elInputUrl.value.split('=');
-        youtubeId = queryString
-    } else if(elInputUrl.value.match(/si/)){
-        let [_, queryString] = elInputUrl.value.split('youtu.be/');
-        [queryString, _] = queryString.split('?si=');
-        youtubeId = queryString
+    if(elinput.value.match(/watch/)) {
+        const [_, query] = elinput.value.split('=');
+        youtubeid = query
+    } else if(elinput.value.match(/si/)){
+        let [_, query] = elinput.value.split('youtu.be/');
+        [query, _] = query.split('?si=');
+        youtubeid = query
     } else {
-        const [_, queryString] = elInputUrl.value.split('youtu.be/');
-        youtubeId = queryString
+        const [_, query] = elinput.value.split('youtu.be/');
+        youtubeid = query
     }
 
     const quality = elquality.value;
 
-    elSubmitButton.disabled = 'true';
-    elSubmitButton.innerText = 'Downloading';
+    elbutton.disabled = 'true';
+    elbutton.innerText = 'Downloading';
 
-    fetch(`/api/ytdl/${youtubeId}?q=${quality}`)
+    fetch(`/api/ytdl/${youtubeid}?q=${quality}`)
         .then((result) => {
             if(result.status == 200) {
                 return result.blob()
@@ -35,14 +35,14 @@ elDownloadForm.addEventListener('submit', (event) => {
             const objurl = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = objurl
-            a.download = `${youtubeId}.mp3`;
+            a.download = `${youtubeid}.mp3`;
             document.body.appendChild(a);
             a.click();
             a.remove;
         })
         .finally(() => {
-            elSubmitButton.disabled = '';
-            elSubmitButton.innerText = 'Download';
-            elInputUrl.value = '';
+            elbutton.disabled = '';
+            elbutton.innerText = 'Download';
+            elinput.value = '';
         })
 });

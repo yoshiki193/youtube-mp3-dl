@@ -2,20 +2,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ytdl</title>
+    <title>ytmp3dl</title>
     <meta name="viewport" content="width=device-width">
 </head>
 <body>
-    <h1>YouTubeDL</h1>
-    <form id="download-form">
-        <input id="input-url" type="text" placeholder="URL">
+    <h1>YouTube MP3 Downloader</h1>
+    <form id="mainform">
+        <input id="url" type="text" placeholder="https://www.youtube.com/">
         <br />
-        <select name="type" id="select-quality">
-        <option value="320">320kbps</option>
-        <option value="256" selected>256kbps</option>
-        <option value="128">128kbps</option>
+        <select name="type" id="quality">
+            <option value="320">320kbps</option>
+            <option value="256" selected>256kbps</option>
+            <option value="128">128kbps</option>
         </select>
-        <button id="download-button">Download</button>
+        <button id="dlbutton">Download</button>
     </form>
     <script src="index.js"></script>
 </body>
