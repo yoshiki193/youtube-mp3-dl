@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    container_name: fastapi
+  nginx:
+    image: nginx:1.27-bookworm
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/usr/share/nginx/html
+    

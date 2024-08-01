@@ -1,0 +1,13 @@
+{
+    "name": "api-dev",
+    "service": "api-dev",
+    "dockerComposeFile":["../api/docker-compose.yml"],
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+services:
+  api-dev:
+    build: .
+    working_dir: "/app"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    tty: true
