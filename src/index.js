@@ -1,8 +1,3 @@
-function parseQuery(queryString) {
-    return [...new URLSearchParams(queryString).entries()]
-        .reduce((obj, e) => ({...obj, [e[0]]: e[1]}), {});
-}
-
 const elDownloadForm = document.getElementById('download-form');
 const elInputUrl = document.getElementById('input-url');
 const elquality = document.getElementById('select-quality');
@@ -11,9 +6,19 @@ const elSubmitButton = document.getElementById('download-button');
 elDownloadForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const [_, queryString] = elInputUrl.value.split('?');
-    const query = parseQuery(queryString);
-    const youtubeId = query.v;
+    let youtubeId = '';
+
+    if(elInputUrl.value.match(/watch/)) {
+        const [_, queryString] = elInputUrl.value.split('=');
+        youtubeId = queryString
+    } else if(elInputUrl.value.match(/si/)){
+        let [_, queryString] = elInputUrl.value.split('youtu.be/');
+        [queryString, _] = queryString.split('?si=');
+        youtubeId = queryString
+    } else {
+        const [_, queryString] = elInputUrl.value.split('youtu.be/');
+        youtubeId = queryString
+    }
 
     const quality = elquality.value;
 
